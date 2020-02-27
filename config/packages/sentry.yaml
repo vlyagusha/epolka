@@ -1,0 +1,2 @@
+sentry:
+    dsn: 'https://6abab464447d45e99faf03d3fec0f08d@sentry.io/3080113'

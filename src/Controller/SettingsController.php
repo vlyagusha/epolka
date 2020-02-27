@@ -19,7 +19,7 @@ class SettingsController extends AbstractController
         SignChecker $signChecker
     ): Response {
         if (!$signChecker->checkSign($request)) {
-            throw new UnauthorizedHttpException($request->getQueryString());
+            throw new UnauthorizedHttpException($request->getQueryString() ?? 'empty query');
         }
 
         $requestLogger->info($request->getQueryString());
