@@ -6,8 +6,22 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SignChecker
 {
+    private string $requestSecret;
+
+    public function __construct(string $requestSecret)
+    {
+        $this->requestSecret = $requestSecret;
+    }
+
     public function checkSign(Request $request): bool
     {
-        return $request->query->has('sign');
+        if (!$request->query->has('sign') || !$request->query->has('epolka_id')) {
+            return false;
+        }
+        $sign = $request->query->get('sign');
+        $epolkaId = $request->query->get('epolka_id');
+        $hash = hash_hmac('sha256', $epolkaId, $this->requestSecret);
+
+        return hash_equals($sign, $hash);
     }
 }

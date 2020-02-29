@@ -8,7 +8,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class SettingsController extends AbstractController
 {
@@ -19,7 +19,7 @@ class SettingsController extends AbstractController
         SignChecker $signChecker
     ): Response {
         if (!$signChecker->checkSign($request)) {
-            throw new UnauthorizedHttpException($request->getQueryString() ?? 'empty query');
+            throw new BadRequestHttpException($request->getQueryString() ?? 'empty query');
         }
 
         $requestLogger->info($request->getQueryString());

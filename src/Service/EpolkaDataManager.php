@@ -3,10 +3,18 @@
 namespace App\Service;
 
 use App\Entity\EpolkaData;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class EpolkaDataManager
 {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     public function handleRequest(Request $request): EpolkaData
     {
         $epolkaData = new EpolkaData();
@@ -21,5 +29,11 @@ class EpolkaDataManager
         $epolkaData->setSensors($sensors);
 
         return $epolkaData;
+    }
+
+    public function storeEpolkaData(EpolkaData $epolkaData): void
+    {
+        $this->entityManager->persist($epolkaData);
+        $this->entityManager->flush();
     }
 }
