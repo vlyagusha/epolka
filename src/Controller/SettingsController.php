@@ -18,8 +18,8 @@ class SettingsController extends AbstractController
         EpolkaSettingsManager $settingsManager,
         SignChecker $signChecker
     ): Response {
-        if (!$signChecker->checkSign($request)) {
-            throw new BadRequestHttpException($request->getQueryString() ?? 'empty query');
+        if (!$signChecker->checkSign()) {
+            throw new BadRequestHttpException();
         }
 
         $requestLogger->info($request->getQueryString());
