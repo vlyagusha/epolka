@@ -4,22 +4,35 @@ namespace App\Entity;
 
 class EpolkaSettings implements \JsonSerializable
 {
-    private string $connectionInterval;
+    private int $connectionInterval;
 
-    public function getConnectionInterval(): string
+    private string $connectionHost;
+
+    public function getConnectionInterval(): int
     {
         return $this->connectionInterval;
     }
 
-    public function setConnectionInterval(string $connectionInterval): void
+    public function setConnectionInterval(int $connectionInterval): void
     {
         $this->connectionInterval = $connectionInterval;
+    }
+
+    public function getConnectionHost(): string
+    {
+        return $this->connectionHost;
+    }
+
+    public function setConnectionHost(string $connectionHost): void
+    {
+        $this->connectionHost = $connectionHost;
     }
 
     public function jsonSerialize()
     {
         return [
-            'connection_interval' => $this->getConnectionInterval()
+            'connection_interval' => $this->getConnectionInterval(),
+            'connection_host' => $this->getConnectionHost(),
         ];
     }
 }

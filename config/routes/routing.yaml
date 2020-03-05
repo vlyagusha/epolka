@@ -1,9 +1,13 @@
 app_store_data:
+    host: '%app.host%'
+    schemes: http
     path: /store
     methods: POST
     controller: App\Controller\StoreController::postAction
 
 app_get_settings:
+    host: '%app.host%'
+    schemes: http
     path: /settings
     methods: GET
     controller: App\Controller\SettingsController::getAction
