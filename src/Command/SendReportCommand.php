@@ -2,8 +2,10 @@
 
 namespace App\Command;
 
+use App\Entity\EpolkaData;
 use App\Event\ReportEvent;
 use App\Event\ReportEvents;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -15,11 +17,14 @@ class SendReportCommand extends Command
 
     private EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(EventDispatcherInterface $eventDispatcher)
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EventDispatcherInterface $eventDispatcher, EntityManagerInterface $entityManager)
     {
         parent::__construct();
 
         $this->eventDispatcher = $eventDispatcher;
+        $this->entityManager = $entityManager;
     }
 
     protected function configure()
@@ -31,7 +36,9 @@ class SendReportCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->eventDispatcher->dispatch(new ReportEvent([]), ReportEvents::ON_SEND);
+        $report = $this->entityManager->getRepository(EpolkaData::class)->getReportData('-1 day');
+
+        $this->eventDispatcher->dispatch(new ReportEvent($report), ReportEvents::ON_SEND);
 
         return 0;
     }

@@ -19,32 +19,18 @@ class EpolkaDataRepository extends ServiceEntityRepository
         parent::__construct($registry, EpolkaData::class);
     }
 
-    // /**
-    //  * @return EpolkaData[] Returns an array of EpolkaData objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param string $period
+     * @return array|EpolkaData[]
+     * @throws \Exception
+     */
+    public function getReportData(string $period): array
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('epolkaData')
+            ->andWhere('epolkaData.connectedAt >= :connectedAt')
+                ->setParameter('connectedAt', new \DateTime($period))
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?EpolkaData
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

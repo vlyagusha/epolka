@@ -2,6 +2,7 @@
 
 namespace App\Event;
 
+use App\Entity\EpolkaData;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class ReportEvent extends Event
@@ -13,6 +14,9 @@ class ReportEvent extends Event
         $this->report = $report;
     }
 
+    /**
+     * @return array|EpolkaData[]
+     */
     public function getReport(): array
     {
         return $this->report;
