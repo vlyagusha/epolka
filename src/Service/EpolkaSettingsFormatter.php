@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Entity\EpolkaSettings;
 
-class EpolkaFormatter
+class EpolkaSettingsFormatter
 {
     public function formatArray(EpolkaSettings $epolkaSettings): array
     {

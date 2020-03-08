@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Service\EpolkaFormatter;
+use App\Service\EpolkaSettingsFormatter;
 use App\Service\EpolkaSettingsManager;
 use App\Service\Security\SignChecker;
 use Psr\Log\LoggerInterface;
@@ -16,7 +16,7 @@ class SettingsController extends AbstractController
         Request $request,
         LoggerInterface $requestLogger,
         EpolkaSettingsManager $settingsManager,
-        EpolkaFormatter $formatter,
+        EpolkaSettingsFormatter $formatter,
         SignChecker $signChecker
     ): Response {
         $signChecker->checkSign($request);

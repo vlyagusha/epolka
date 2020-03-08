@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Service\EpolkaDataManager;
-use App\Service\EpolkaFormatter;
+use App\Service\EpolkaSettingsFormatter;
 use App\Service\EpolkaSettingsManager;
 use App\Service\Security\SignChecker;
 use Psr\Log\LoggerInterface;
@@ -18,7 +18,7 @@ class StoreController extends AbstractController
         LoggerInterface $requestLogger,
         EpolkaDataManager $dataManager,
         EpolkaSettingsManager $settingsManager,
-        EpolkaFormatter $formatter,
+        EpolkaSettingsFormatter $formatter,
         SignChecker $signChecker
     ): Response {
         $signChecker->checkSign($request);
