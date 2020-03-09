@@ -8,6 +8,8 @@ class EpolkaSettings implements \JsonSerializable
 
     private string $connectionHost;
 
+    private string $connectionPath;
+
     public function getConnectionInterval(): int
     {
         return $this->connectionInterval;
@@ -28,11 +30,22 @@ class EpolkaSettings implements \JsonSerializable
         $this->connectionHost = $connectionHost;
     }
 
+    public function getConnectionPath(): string
+    {
+        return $this->connectionPath;
+    }
+
+    public function setConnectionPath(string $connectionPath): void
+    {
+        $this->connectionPath = $connectionPath;
+    }
+
     public function jsonSerialize()
     {
         return [
             'connection_interval' => $this->getConnectionInterval(),
             'connection_host' => $this->getConnectionHost(),
+            'connection_path' => $this->getConnectionPath(),
         ];
     }
 }

@@ -21,7 +21,8 @@ class EpolkaSettingsManager
     {
         $epolkaSettings = new EpolkaSettings();
         $epolkaSettings->setConnectionInterval(24 * 60 * 60);
-        $epolkaSettings->setConnectionHost($this->router->generate('app_store_data', [], RouterInterface::ABSOLUTE_URL));
+        $epolkaSettings->setConnectionHost($this->host);
+        $epolkaSettings->setConnectionPath($this->router->generate('app_store_data', [], RouterInterface::ABSOLUTE_PATH));
 
         return $epolkaSettings;
     }
