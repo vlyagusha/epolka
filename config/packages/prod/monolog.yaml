@@ -16,6 +16,7 @@ monolog:
             level: debug
             channels: ["!event"]
             max_files: 100
+            file_permission: 777
         console:
             type: console
             process_psr_3_messages: false
