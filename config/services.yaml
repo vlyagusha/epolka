@@ -33,3 +33,8 @@ services:
     App\Service\EpolkaSettingsManager:
         arguments:
             $host: '%app.host%'
+
+    App\EventListeners\EmailReportSendSubscriber:
+        arguments:
+            $reportEmailRecipients: '%app.report_email_recipients%'
+            $reportEmailSender: '%app.report_email_sender%'
