@@ -23,6 +23,8 @@ services:
       localnet:
         aliases:
           - epolka.local
+    environment:
+      PHP_IDE_CONFIG: serverName=epolka.local
   postgres:
     container_name: epolka-postgres
     image: postgres

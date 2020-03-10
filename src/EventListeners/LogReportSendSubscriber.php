@@ -25,7 +25,7 @@ class LogReportSendSubscriber implements EventSubscriberInterface
 
     public function onReportSend(ReportEvent $event): void
     {
-        if (empty([$event->getReport()])) {
+        if (empty($event->getReport())) {
             $this->reportLogger->warning('Report data is empty!');
 
             return;
