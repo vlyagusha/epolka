@@ -1,4 +1,5 @@
 monolog:
+    channels: ["report"]
     handlers:
         main:
             type: fingers_crossed
@@ -10,12 +11,20 @@ monolog:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
+            channels: ["!request","!report"]
             file_permission: 0777
-        file_log:
+        request:
             type: rotating_file
-            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            path: "%kernel.logs_dir%/%kernel.environment%.request.log"
             level: debug
-            channels: ["!event"]
+            channels: ["request"]
+            max_files: 100
+            file_permission: 0777
+        report:
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%.report.log"
+            level: debug
+            channels: ["report"]
             max_files: 100
             file_permission: 0777
         console:

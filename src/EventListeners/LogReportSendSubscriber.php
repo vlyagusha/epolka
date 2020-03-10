@@ -9,11 +9,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class LogReportSendSubscriber implements EventSubscriberInterface
 {
-    private LoggerInterface $reportLogger;
+    private LoggerInterface $logger;
 
     public function __construct(LoggerInterface $reportLogger)
     {
-        $this->reportLogger = $reportLogger;
+        $this->logger = $reportLogger;
     }
 
     public static function getSubscribedEvents()
@@ -26,7 +26,7 @@ class LogReportSendSubscriber implements EventSubscriberInterface
     public function onReportSend(ReportEvent $event): void
     {
         if (empty($event->getReport())) {
-            $this->reportLogger->warning('Report data is empty!');
+            $this->logger->warning('Report data is empty!');
 
             return;
         }
@@ -40,7 +40,7 @@ class LogReportSendSubscriber implements EventSubscriberInterface
                 implode(';', $report->getSensors())
             ]);
 
-            $this->reportLogger->info('Sent report: ' . $reportData);
+            $this->logger->info('Sent report: ' . $reportData);
         }
 
         return;
