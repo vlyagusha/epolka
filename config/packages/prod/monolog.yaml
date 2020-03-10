@@ -15,14 +15,14 @@ monolog:
             file_permission: 0777
         request:
             type: rotating_file
-            path: "%kernel.logs_dir%/request/%kernel.environment%.log"
+            path: "%kernel.logs_dir%/%kernel.environment%.request.log"
             level: debug
             channels: ["request"]
             max_files: 100
             file_permission: 0777
         report:
             type: rotating_file
-            path: "%kernel.logs_dir%/report/%kernel.environment%.log"
+            path: "%kernel.logs_dir%/%kernel.environment%.report.log"
             level: debug
             channels: ["report"]
             max_files: 100
