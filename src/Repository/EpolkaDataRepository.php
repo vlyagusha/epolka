@@ -19,16 +19,11 @@ class EpolkaDataRepository extends ServiceEntityRepository
         parent::__construct($registry, EpolkaData::class);
     }
 
-    /**
-     * @param string $period
-     * @return array|EpolkaData[]
-     * @throws \Exception
-     */
-    public function getReportData(string $period): array
+    public function getReportData(\DateTime $period): array
     {
         return $this->createQueryBuilder('epolkaData')
             ->andWhere('epolkaData.connectedAt >= :connectedAt')
-                ->setParameter('connectedAt', new \DateTime($period))
+                ->setParameter('connectedAt', $period)
             ->getQuery()
             ->getResult()
         ;

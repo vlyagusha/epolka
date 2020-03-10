@@ -8,6 +8,7 @@ use App\Event\ReportEvents;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -31,12 +32,14 @@ class SendReportCommand extends Command
     {
         $this
             ->setDescription('Рассылает отчёты')
+            ->addOption('period', null, InputOption::VALUE_REQUIRED);
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $report = $this->entityManager->getRepository(EpolkaData::class)->getReportData('-1 day');
+        $period = new \DateTime($input->getOption('period'));
+        $report = $this->entityManager->getRepository(EpolkaData::class)->getReportData($period);
 
         $this->eventDispatcher->dispatch(new ReportEvent($report), ReportEvents::ON_SEND);
 
