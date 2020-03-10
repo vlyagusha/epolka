@@ -10,14 +10,14 @@ monolog:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
-            file_permission: 777
+            file_permission: 0777
         file_log:
             type: rotating_file
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
             channels: ["!event"]
             max_files: 100
-            file_permission: 777
+            file_permission: 0777
         console:
             type: console
             process_psr_3_messages: false
@@ -25,7 +25,7 @@ monolog:
         deprecation:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.deprecations.log"
-            file_permission: 777
+            file_permission: 0777
         deprecation_filter:
             type: filter
             handler: deprecation

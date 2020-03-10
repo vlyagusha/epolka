@@ -6,7 +6,7 @@ monolog:
             level: debug
             channels: ["!event"]
             max_files: 100
-            file_permission: 777
+            file_permission: 0777
         # uncomment to get logging in your browser
         # you may have to allow bigger header sizes in your Web server configuration
         #firephp:
