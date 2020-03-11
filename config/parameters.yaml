@@ -15,3 +15,4 @@ parameters:
     app.ftp.host: '%env(FTP_HOST)%'
     app.ftp.port: '%env(FTP_PORT)%'
     app.ftp.path: '%env(FTP_PATH)%'
+    app.ftp.is_passive: '%env(FTP_PASSIVE)%'

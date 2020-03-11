@@ -18,9 +18,11 @@ class FtpClient
 
     private string $password;
 
+    private bool $isPassive;
+
     private $ftp;
 
-    public function __construct(string $host, int $port, string $path, int $timeout, string $username, string $password)
+    public function __construct(string $host, int $port, string $path, int $timeout, string $username, string $password, bool $isPassive)
     {
         $this->host = $host;
         $this->port = $port;
@@ -28,6 +30,7 @@ class FtpClient
         $this->timeout = $timeout;
         $this->username = $username;
         $this->password = $password;
+        $this->isPassive = $isPassive;
     }
 
     public function upload(string $remoteFileName, string $localFileName, int $mode = FTP_ASCII): void
@@ -40,7 +43,7 @@ class FtpClient
             throw new FtpClientException(sprintf('Не удалось залогиниться username %s password %s', $this->username, $this->password));
         }
 
-        if (!ftp_pasv($this->ftp, true)) {
+        if ($this->isPassive && !ftp_pasv($this->ftp, true)) {
             throw new FtpClientException(sprintf('Не удалось установить пасивный режим'));
         }
 

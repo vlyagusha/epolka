@@ -47,3 +47,4 @@ services:
             $timeout: 90
             $username: '%app.ftp.username%'
             $password: '%app.ftp.password%'
+            $isPassive: '%app.ftp.is_passive%'
