@@ -13,6 +13,6 @@ parameters:
     app.ftp.username: '%env(FTP_USERNAME)%'
     app.ftp.password: '%env(FTP_PASSWORD)%'
     app.ftp.host: '%env(FTP_HOST)%'
-    app.ftp.port: '%env(FTP_PORT)%'
+    app.ftp.port: '%env(int:FTP_PORT)%'
     app.ftp.path: '%env(FTP_PATH)%'
-    app.ftp.is_passive: '%env(FTP_PASSIVE)%'
+    app.ftp.is_passive: '%env(bool:FTP_PASSIVE)%'
