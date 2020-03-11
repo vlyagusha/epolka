@@ -3,8 +3,15 @@ parameters:
     app.request_secret: '%env(REQUEST_SECRET)%'
     app.scheme: http
     app.base_url: '%app.scheme%://%app.host%'
+
     app.report_email_recipients:
         - 'vlyagusha@yandex.ru'
         - 'bondar.s@europos.ru'
         - 'rpurey@gmail.com'
     app.report_email_sender: 'epolka.epolka@yandex.ru'
+
+    app.ftp.username: '%env(FTP_USERNAME)%'
+    app.ftp.password: '%env(FTP_PASSWORD)%'
+    app.ftp.host: '%env(FTP_HOST)%'
+    app.ftp.port: '%env(FTP_PORT)%'
+    app.ftp.path: '%env(FTP_PATH)%'

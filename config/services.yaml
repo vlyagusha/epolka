@@ -38,3 +38,12 @@ services:
         arguments:
             $reportEmailRecipients: '%app.report_email_recipients%'
             $reportEmailSender: '%app.report_email_sender%'
+
+    App\Service\FtpClient:
+        arguments:
+            $host: '%app.ftp.host%'
+            $port: '%app.ftp.port%'
+            $path: '%app.ftp.path%'
+            $timeout: 90
+            $username: '%app.ftp.username%'
+            $password: '%app.ftp.password%'

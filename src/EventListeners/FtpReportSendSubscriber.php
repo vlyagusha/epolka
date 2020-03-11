@@ -4,10 +4,18 @@ namespace App\EventListeners;
 
 use App\Event\ReportEvent;
 use App\Event\ReportEvents;
+use App\Service\FtpClient;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class FtpReportSendSubscriber implements EventSubscriberInterface
 {
+    private FtpClient $ftpClient;
+
+    public function __construct(FtpClient $ftpClient)
+    {
+        $this->ftpClient = $ftpClient;
+    }
+
     public static function getSubscribedEvents()
     {
         return [
@@ -17,6 +25,17 @@ class FtpReportSendSubscriber implements EventSubscriberInterface
 
     public function onReportSend(ReportEvent $event): void
     {
+        $reportData = $event->getTextReport();
 
+        $fileName = sprintf('report_%s.csv', (new \DateTime())->format('Y-m-d_H:i:s'));
+        $localFileName = 'var/' . $fileName;
+
+        file_put_contents($localFileName, $reportData);
+
+        $this->ftpClient->upload($fileName, $localFileName);
+
+        unlink($localFileName);
+
+        return;
     }
 }
