@@ -48,7 +48,7 @@ class FtpClient
         }
 
         if (!ftp_put($this->ftp, $this->path . $remoteFileName, $localFileName, $mode)) {
-            throw new FtpClientException(sprintf('Не удалось загрузить файл %s на сервер в %s', $localFileName, $this->path . $localFileName));
+            throw new FtpClientException(sprintf('Не удалось загрузить файл %s на сервер в %s', $localFileName, $this->path . $remoteFileName));
         }
 
         if (!ftp_close($this->ftp)) {
