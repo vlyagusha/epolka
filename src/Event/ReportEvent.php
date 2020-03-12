@@ -22,10 +22,8 @@ class ReportEvent extends Event
         return $this->report;
     }
 
-    public function getTextReport(): string
+    public function getTextReport(): ?string
     {
-        $reportData = 'Report data is empty!';
-
         if (!empty($this->getReport())) {
             $reportData = [];
             foreach ($this->getReport() as $report) {
@@ -40,6 +38,6 @@ class ReportEvent extends Event
             $reportData = implode("\n", $reportData);
         }
 
-        return $reportData;
+        return $reportData ?? null;
     }
 }

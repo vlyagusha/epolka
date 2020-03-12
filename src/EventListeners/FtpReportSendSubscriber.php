@@ -11,9 +11,12 @@ class FtpReportSendSubscriber implements EventSubscriberInterface
 {
     private FtpClient $ftpClient;
 
-    public function __construct(FtpClient $ftpClient)
+    private string $path;
+
+    public function __construct(FtpClient $ftpClient, string $path)
     {
         $this->ftpClient = $ftpClient;
+        $this->path = $path;
     }
 
     public static function getSubscribedEvents()
@@ -25,10 +28,10 @@ class FtpReportSendSubscriber implements EventSubscriberInterface
 
     public function onReportSend(ReportEvent $event): void
     {
-        $reportData = $event->getTextReport();
+        $reportData = $event->getTextReport() ?? '';
 
         $fileName = sprintf('report_%s.csv', (new \DateTime())->format('Y-m-d_H:i:s'));
-        $localFileName = 'var/' . $fileName;
+        $localFileName = $this->path . $fileName;
 
         file_put_contents($localFileName, $reportData);
 

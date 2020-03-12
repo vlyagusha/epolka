@@ -3,6 +3,7 @@ parameters:
     app.request_secret: '%env(REQUEST_SECRET)%'
     app.scheme: http
     app.base_url: '%app.scheme%://%app.host%'
+    app.var_dir: '%kernel.project_dir%/var/'
 
     app.report_email_recipients:
         - 'vlyagusha@yandex.ru'

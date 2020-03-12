@@ -32,7 +32,7 @@ class EmailReportSendSubscriber implements EventSubscriberInterface
 
     public function onReportSend(ReportEvent $event): void
     {
-        $reportData = $event->getTextReport();
+        $reportData = $event->getTextReport() ?? 'Report data is empty!';
 
         $reportEmail = (new Email())
             ->from($this->reportEmailSender)

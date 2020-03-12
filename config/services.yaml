@@ -48,3 +48,7 @@ services:
             $username: '%app.ftp.username%'
             $password: '%app.ftp.password%'
             $isPassive: '%app.ftp.is_passive%'
+
+    App\EventListeners\FtpReportSendSubscriber:
+        arguments:
+            $path: '%app.var_dir%'
