@@ -17,3 +17,5 @@ parameters:
     app.ftp.port: '%env(int:FTP_PORT)%'
     app.ftp.path: '%env(FTP_PATH)%'
     app.ftp.is_passive: '%env(bool:FTP_PASSIVE)%'
+
+    app.default_connection_interval: '%env(int:DEFAULT_CONNECTION_INTERVAL)%'
