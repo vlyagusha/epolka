@@ -30,7 +30,7 @@ class FtpReportSendSubscriber implements EventSubscriberInterface
     {
         $reportData = $event->getTextReport() ?? '';
 
-        $fileName = sprintf('report_%s.csv', (new \DateTime())->format('Y-m-d_H:i:s'));
+        $fileName = sprintf('report_%s.csv', (new \DateTime('now', new \DateTimeZone('Europe/Moscow')))->format('Y-m-d_H:i:s'));
         $localFileName = $this->path . $fileName;
 
         file_put_contents($localFileName, $reportData);

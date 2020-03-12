@@ -38,7 +38,7 @@ class SendReportCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $period = new \DateTime($input->getOption('period'));
+        $period = new \DateTime($input->getOption('period'), new \DateTimeZone('Europe/Moscow'));
         $report = $this->entityManager->getRepository(EpolkaData::class)->getReportData($period);
 
         $this->eventDispatcher->dispatch(new ReportEvent($report), ReportEvents::ON_SEND);
