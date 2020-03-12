@@ -21,8 +21,8 @@ class EpolkaDataManager
         $epolkaData->setEpolkaId($request->query->get('epolka_id'));
         $epolkaData->setConnectedAt(new \DateTime('now', new \DateTimeZone('Europe/Moscow')));
         $epolkaData->setConnectId($request->query->getInt('connect_id'));
-        $epolkaData->setVoltage($request->query->get('voltage'));
-        $epolkaData->setSignalLevel($request->query->get('signal_level'));
+        $epolkaData->setVoltage((float)$request->query->get('voltage'));
+        $epolkaData->setSignalLevel($request->query->getInt('signal_level'));
         $sensors = explode(';', $request->query->get('sensors'));
         $sensors = array_filter($sensors);
         $sensors = array_map('floatval', $sensors);
