@@ -23,7 +23,7 @@ class StoreController extends AbstractController
     ): Response {
         $signChecker->checkSign($request);
 
-        $requestLogger->info($request->getQueryString());
+        $requestLogger->info(urldecode($request->getQueryString()));
 
         $epolkaData = $dataManager->handleRequest($request);
         $dataManager->storeEpolkaData($epolkaData);

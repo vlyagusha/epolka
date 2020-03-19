@@ -21,7 +21,7 @@ class SettingsController extends AbstractController
     ): Response {
         $signChecker->checkSign($request);
 
-        $requestLogger->info($request->getQueryString());
+        $requestLogger->info(urldecode($request->getQueryString()));
 
         return new Response(implode(';', [
             Response::HTTP_OK,
