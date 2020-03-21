@@ -35,7 +35,7 @@ class FtpClient
 
     public function upload(string $remoteFileName, string $localFileName, int $mode = FTP_ASCII): void
     {
-        if (($this->ftp = ftp_connect($this->host, $this->port, $this->timeout)) === false) {
+        if (($this->ftp = ftp_ssl_connect($this->host, $this->port, $this->timeout)) === false) {
             throw new FtpClientException(sprintf('Не удалось соединиться с сервером host %s port %s timeout %s', $this->host, $this->port, $this->timeout));
         }
 
