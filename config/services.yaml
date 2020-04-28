@@ -32,7 +32,7 @@ services:
 
     App\Service\EpolkaSettingsManager:
         arguments:
-            $host: '%app.host%'
+            $host: '%app.settings.host%'
             $connectionInterval: '%app.default_connection_interval%'
 
     App\EventListeners\EmailReportSendSubscriber:

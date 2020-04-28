@@ -12,3 +12,4 @@ data
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+/deploy/log
