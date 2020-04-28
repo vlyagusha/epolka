@@ -40,6 +40,25 @@ set :keep_releases, 5
 
 append :copy_files, 'vendor'
 
+namespace :crontab do
+    desc 'Install crontab'
+    task :install do
+        on roles(:cron) do |server|
+            crontab_file = "crontab/crontab.erb"
+
+            template = ERB.new(File.new(crontab_file).read).result(binding)
+            execute :echo, Shellwords.escape(template.force_encoding('binary')), '|', :crontab, '-'
+        end
+    end
+
+    desc 'Clear crontab'
+    task :clear do
+        on roles(:cron) do
+            execute :crontab, '-r', raise_on_non_zero_exit: false
+        end
+    end
+end
+
 namespace :cache do
   task :clear do
     on roles(:web) do
@@ -72,4 +91,6 @@ namespace :deploy do
   before :cleanup, 'migrations:migrate'
   before :cleanup, 'cache:clear'
   before :cleanup, 'cache:warmup'
+  before :cleanup, 'crontab:clear'
+  after :cleanup, 'crontab:install'
 end
