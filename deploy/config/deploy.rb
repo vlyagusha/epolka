@@ -87,10 +87,21 @@ namespace :migrations do
   end
 end
 
+namespace :fpm do
+  task :restart do
+    on roles(:web) do
+      within release_path do
+        execute "sudo", "service", "php7.4-fpm", "restart"
+      end
+    end
+  end
+end
+
 namespace :deploy do
   before :cleanup, 'migrations:migrate'
   before :cleanup, 'cache:clear'
   before :cleanup, 'cache:warmup'
   before :cleanup, 'crontab:clear'
   after :cleanup, 'crontab:install'
+  after :finishing, 'fpm:restart'
 end
