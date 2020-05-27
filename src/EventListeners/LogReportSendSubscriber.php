@@ -25,22 +25,14 @@ class LogReportSendSubscriber implements EventSubscriberInterface
 
     public function onReportSend(ReportEvent $event): void
     {
-        if (empty($event->getReport())) {
+        if ($event->getTextReport() === null) {
             $this->logger->warning('Report data is empty!');
 
             return;
         }
 
-        foreach ($event->getReport() as $report) {
-            $reportData = implode(';', [
-                $report->getEpolkaId(),
-                $report->getConnectedAt()->format('Y-m-d H:i:s'),
-                $report->getSignalLevel(),
-                $report->getVoltage(),
-                implode(';', $report->getSensors())
-            ]);
-
-            $this->logger->info('Sent report: ' . $reportData);
+        foreach (explode("\n", $event->getTextReport()) as $report) {
+            $this->logger->info('Sent report: ' . $report);
         }
 
         return;
