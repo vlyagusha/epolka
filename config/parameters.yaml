@@ -1,6 +1,9 @@
 parameters:
     app.host: '%env(APP_HOST)%'
     app.settings.host: '%env(APP_SETTINGS_HOST)%'
+    app.settings.alt_host: '%env(APP_SETTINGS_ALT_HOST)%'
+    app.settings.default_connection_interval: '%env(int:DEFAULT_CONNECTION_INTERVAL)%'
+    app.settings.alt_connection_interval: '%env(int:ALT_CONNECTION_INTERVAL)%'
     app.request_secret: '%env(REQUEST_SECRET)%'
     app.scheme: http
     app.base_url: '%app.scheme%://%app.host%'
@@ -18,5 +21,3 @@ parameters:
     app.ftp.port: '%env(int:FTP_PORT)%'
     app.ftp.path: '%env(FTP_PATH)%'
     app.ftp.is_passive: '%env(bool:FTP_PASSIVE)%'
-
-    app.default_connection_interval: '%env(int:DEFAULT_CONNECTION_INTERVAL)%'

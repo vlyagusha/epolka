@@ -18,7 +18,7 @@ class StoreController extends AbstractController
         LoggerInterface $requestLogger,
         EpolkaDataManager $dataManager,
         EpolkaSettingsManager $settingsManager,
-        EpolkaSettingsFormatter $formatter,
+        EpolkaSettingsFormatter $settingsFormatter,
         SignChecker $signChecker
     ): Response {
         $signChecker->checkSign($request);
@@ -30,7 +30,7 @@ class StoreController extends AbstractController
 
         return new Response(implode(';', [
             Response::HTTP_OK,
-            $formatter->formatString($settingsManager->getSettings())
+            $settingsFormatter->formatString($settingsManager->getSettings($epolkaData))
         ]));
     }
 }

@@ -33,7 +33,9 @@ services:
     App\Service\EpolkaSettingsManager:
         arguments:
             $host: '%app.settings.host%'
-            $connectionInterval: '%app.default_connection_interval%'
+            $altHost: '%app.settings.alt_host%'
+            $connectionInterval: '%app.settings.default_connection_interval%'
+            $altConnectionInterval: '%app.settings.alt_connection_interval%'
 
     App\EventListeners\EmailReportSendSubscriber:
         arguments:

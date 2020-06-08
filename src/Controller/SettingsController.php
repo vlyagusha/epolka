@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\EpolkaDataManager;
 use App\Service\EpolkaSettingsFormatter;
 use App\Service\EpolkaSettingsManager;
 use App\Service\Security\SignChecker;
@@ -15,17 +16,19 @@ class SettingsController extends AbstractController
     public function getAction(
         Request $request,
         LoggerInterface $requestLogger,
+        EpolkaDataManager $dataManager,
         EpolkaSettingsManager $settingsManager,
-        EpolkaSettingsFormatter $formatter,
+        EpolkaSettingsFormatter $settingsFormatter,
         SignChecker $signChecker
     ): Response {
         $signChecker->checkSign($request);
 
+        $epolkaData = $dataManager->handleRequest($request);
         $requestLogger->info(urldecode($request->getQueryString()));
 
         return new Response(implode(';', [
             Response::HTTP_OK,
-            $formatter->formatString($settingsManager->getSettings())
+            $settingsFormatter->formatString($settingsManager->getSettings($epolkaData))
         ]));
     }
 }
