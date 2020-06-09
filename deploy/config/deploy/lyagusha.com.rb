@@ -6,7 +6,7 @@
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
-server "80.78.254.231", user: "vlyagusha", roles: %w{app db web cron}
+server "80.78.254.231", user: "vlyagusha", roles: %w{app db web cron}, :cron_file => 'lyagusha.com'
 
 
 # role-based syntax

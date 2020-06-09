@@ -44,7 +44,7 @@ namespace :crontab do
     desc 'Install crontab'
     task :install do
         on roles(:cron) do |server|
-            crontab_file = "crontab/crontab.erb"
+            crontab_file = "crontab/#{server.properties.cron_file}.rb"
 
             template = ERB.new(File.new(crontab_file).read).result(binding)
             execute :echo, Shellwords.escape(template.force_encoding('binary')), '|', :crontab, '-'
