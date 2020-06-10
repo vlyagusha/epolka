@@ -13,7 +13,7 @@ parameters:
         - 'vlyagusha@yandex.ru'
         - 'bondar.s@europos.ru'
         - 'rpurey@gmail.com'
-    app.report_email_sender: 'epolka.epolka@yandex.ru'
+    app.report_email_sender: 'rbh-remotepos@europos.ru'
 
     app.ftp.username: '%env(FTP_USERNAME)%'
     app.ftp.password: '%env(FTP_PASSWORD)%'
