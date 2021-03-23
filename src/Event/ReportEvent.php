@@ -33,7 +33,8 @@ class ReportEvent extends Event
                     $report->getSignalLevel(),
                     $report->getVoltage(),
                     count($report->getSensors()),
-                    implode(';', array_pad($report->getSensors(), 12, 0))
+                    implode(';', array_pad($report->getSensors(), 12, 0)),
+                    $report->getConnectId(),
                 ]);
             }
             $reportData = implode("\n", $reportData);
